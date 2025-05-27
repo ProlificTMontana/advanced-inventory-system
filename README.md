@@ -76,7 +76,7 @@ This project provides a deployable and fully customizable inventory management s
 
     Clone the repository:
 
-     git clone https://github.com/ProlifiTMontana/advanced-inventory-system.git
+     git clone https://github.com/ProlificTMontana/advanced-inventory-system.git
 
      cd advanced-inventory-system
 
