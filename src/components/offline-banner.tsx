@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { WifiOff } from 'lucide-react';
 import { useInventoryStore } from '../store/inventory-store';
 

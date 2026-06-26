@@ -7,12 +7,12 @@ import { useTheme } from '../context/theme-context';
 import { useAuth } from '../hooks/use-auth';
 import { useProfile } from '../hooks/use-profile';
 import { useStaffManagement } from '../hooks/use-staff-management';
-import { Cpu, ShieldAlert, HardDrive, UserPlus, Trash2, Edit, Loader2 } from 'lucide-react';
+import { Cpu, ShieldAlert, UserPlus, Trash2, Loader2 } from 'lucide-react';
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme();
   const { user: authUser } = useAuth();
-  const { profile } = useProfile(authUser?.id);
+  const { data: profile } = useProfile(authUser?.id);
   const { staff, isLoading, createStaff, updateStaffRole, deleteStaff } = useStaffManagement();
   
   const [isAddStaffModalOpen, setIsAddStaffModalOpen] = useState(false);
