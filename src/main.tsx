@@ -8,8 +8,11 @@ import Login from './pages/login';
 import Landing from './pages/landing';
 import Dashboard from './pages/dashboard';
 import Items from './pages/items';
+import ReorderRequests from './pages/reorder-requests';
 import Reports from './pages/reports';
 import Settings from './pages/settings';
+import Scan from './pages/scan';
+import Dispatch from './pages/dispatch';
 import PWAPrompt from './components/pwa-prompt';
 import OfflineBanner from './components/offline-banner';
 import './lib/sentry';
@@ -36,8 +39,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="items" element={<Items />} />
+              <Route path="dispatch" element={<Dispatch />} />
+              <Route path="reorder-requests" element={<ReorderRequests />} />
               <Route path="reports" element={<Reports />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="scan" element={<Scan />} />
             </Route>
           </Routes>
           <PWAPrompt />

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Boxes, FileBarChart, Settings as SettingsIcon, LogOut, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, Boxes, FileBarChart, Settings as SettingsIcon, ShoppingCart, Truck, LogOut, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../hooks/use-auth';
 import { useProfile } from '../hooks/use-profile';
 import { useInventoryStore } from '../store/inventory-store';
 import { useTheme } from '../context/theme-context';
+import { NotificationCenter } from './notification-center';
 
 export default function Layout() {
   const { user: authUser, signOut } = useAuth();
@@ -38,6 +39,8 @@ export default function Layout() {
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/items', label: 'Inventory', icon: Boxes },
+    { path: '/dispatch', label: 'Dispatch', icon: Truck },
+    { path: '/reorder-requests', label: 'Reorders', icon: ShoppingCart },
     { path: '/reports', label: 'Analytics', icon: FileBarChart },
     { path: '/settings', label: 'Settings', icon: SettingsIcon },
   ];
@@ -52,9 +55,12 @@ export default function Layout() {
               <div className="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white text-sm tracking-wider">A</div>
               <span className="font-bold text-lg text-slate-900 dark:text-white tracking-tight">AIMS PWA</span>
             </div>
-            <button onClick={toggleTheme} className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-            </button>
+            <div className="flex items-center gap-2">
+              <NotificationCenter />
+              <button onClick={toggleTheme} className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
 
           <nav className="space-y-1">

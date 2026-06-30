@@ -10,7 +10,8 @@ import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { Dialog } from '../components/ui/dialog';
-import { Search, Plus, SlidersHorizontal, AlertCircle, Trash2, Edit, Loader2 } from 'lucide-react';
+import { Search, Plus, SlidersHorizontal, AlertCircle, Trash2, Edit, Loader2, ScanLine } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Items() {
   const { items, isLoading, createItem, updateItem, deleteItem } = useItems();
@@ -19,6 +20,7 @@ export default function Items() {
   const { createTransaction } = useTransactions();
   const { user: authUser } = useAuth();
   const { data: profile } = useProfile(authUser?.id);
+  const navigate = useNavigate();
   
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -253,6 +255,15 @@ export default function Items() {
           </div>
         </form>
       </Dialog>
+
+      {/* Scanner FAB */}
+      <button
+        onClick={() => navigate('/scan')}
+        className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-40"
+        title="Open Barcode Scanner"
+      >
+        <ScanLine className="w-6 h-6" />
+      </button>
     </div>
   );
 }

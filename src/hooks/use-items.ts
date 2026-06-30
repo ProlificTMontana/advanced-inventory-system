@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase, Database } from '../lib/supabase';
+import { useEffect } from 'react';
 
 type Item = Database['public']['Tables']['items']['Row'];
 type ItemInsert = Database['public']['Tables']['items']['Insert'];
@@ -24,6 +25,29 @@ export function useItems() {
       return data as (Item & { categories: { name: string } | null; suppliers: { name: string } | null })[];
     },
   });
+
+  // Set up Supabase Realtime subscription for items
+  useEffect(() => {
+    const channel = supabase
+      .channel('items_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'items',
+        },
+        (payload) => {
+          console.log('Realtime item change:', payload);
+          queryClient.invalidateQueries({ queryKey: ['items'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
 
   const createItem = useMutation({
     mutationFn: async (item: ItemInsert) => {

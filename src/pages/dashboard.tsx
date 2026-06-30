@@ -1,6 +1,7 @@
 import { useItems } from '../hooks/use-items';
 import { useTransactions } from '../hooks/use-transactions';
 import { Card } from '../components/ui/card';
+import { AlertsWidget } from '../components/alerts-widget';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Boxes, AlertTriangle, Activity, Layers } from 'lucide-react';
 
@@ -68,9 +69,14 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        <Card className="p-4 flex flex-col justify-between">
-          <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Category Dispersion</h4>
-          <div className="h-48 w-full relative flex items-center justify-center">
+        <AlertsWidget />
+      </div>
+
+      {/* Category Dispersion */}
+      <Card className="p-4">
+        <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-4">Category Dispersion</h4>
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="h-48 w-full md:w-48 relative flex items-center justify-center shrink-0">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie data={pieData} innerRadius={50} outerRadius={70} paddingAngle={3} dataKey="value">
@@ -82,7 +88,7 @@ export default function Dashboard() {
               </PieChart>
             </ResponsiveContainer>
           </div>
-          <div className="space-y-1.5 max-h-24 overflow-y-auto px-2">
+          <div className="flex-1 space-y-1.5 max-h-48 overflow-y-auto">
             {pieData.map((d, i) => (
               <div key={i} className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2 truncate">
@@ -93,8 +99,8 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-        </Card>
-      </div>
+        </div>
+      </Card>
 
       {/* System Transaction Logs */}
       <Card className="p-4">

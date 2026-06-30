@@ -24,7 +24,7 @@ export interface Transaction {
 
 interface UserProfile {
   username: string;
-  role: 'admin' | 'manager' | 'staff';
+  role: 'admin' | 'manager' | 'staff' | 'dispatcher' | 'driver';
   email: string;
 }
 
